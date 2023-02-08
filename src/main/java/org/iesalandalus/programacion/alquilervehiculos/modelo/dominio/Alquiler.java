@@ -104,7 +104,7 @@ public class Alquiler {
 	public int getPrecio() {
 		return getFechaDevolucion() != null
 				? (PRECIO_DIA + (getTurismo().getCilindrada() / 10))
-						* ((int) (fechaAlquiler.until(fechaDevolucion, ChronoUnit.DAYS))) : 0;
+						* ((int) (getFechaAlquiler().until(getFechaDevolucion(), ChronoUnit.DAYS))) : 0;
 	}
 
 	@Override
