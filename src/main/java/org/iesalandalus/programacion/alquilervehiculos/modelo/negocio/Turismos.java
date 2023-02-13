@@ -25,10 +25,10 @@ public class Turismos {
 
 	public void insertar(Turismo turismo) throws OperationNotSupportedException {
 		if (turismo == null) {
-			throw new NullPointerException("turismo insertar nulo");
+			throw new NullPointerException("ERROR: No se puede insertar un turismo nulo.");
 		}
 		if (coleccionTurismos.contains(turismo)) {
-			throw new OperationNotSupportedException("ya contiene turismo");
+			throw new OperationNotSupportedException("ERROR: Ya existe un turismo con esa matrícula.");
 		}
 		coleccionTurismos.add(turismo);
 	}
@@ -43,10 +43,10 @@ public class Turismos {
 
 	public void borrar(Turismo turismo) throws OperationNotSupportedException {
 		if (turismo == null) {
-			throw new NullPointerException("turismo norrar nulo");
+			throw new NullPointerException("ERROR: No se puede borrar un turismo nulo.");
 		}
 		if (!coleccionTurismos.contains(turismo)) {
-			throw new OperationNotSupportedException("no contiene borrar");
+			throw new OperationNotSupportedException("ERROR: No existe ningún turismo con esa matrícula.");
 		}
 		coleccionTurismos.remove(turismo);
 	}
