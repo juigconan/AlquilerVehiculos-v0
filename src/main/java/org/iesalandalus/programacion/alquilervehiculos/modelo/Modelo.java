@@ -48,10 +48,8 @@ public class Modelo {
 		if(turismos.buscar(alquiler.getTurismo()) == null) {
 			throw new OperationNotSupportedException("ERROR: No existe el turismo del alquiler.");
 		}
-		Cliente cliente = new Cliente(alquiler.getCliente());
-		Turismo turismo = new Turismo(alquiler.getTurismo());
-		
-		alquileres.insertar(new Alquiler(cliente, turismo, alquiler.getFechaAlquiler()));
+		//El constructor copia de Alquiler ya se ocupa de crear un nuevo cliente y un nuevo turismo
+		alquileres.insertar(new Alquiler(alquiler));
 	}
 
 	public Cliente buscar(Cliente cliente) {

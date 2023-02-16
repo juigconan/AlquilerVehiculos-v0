@@ -1,5 +1,7 @@
 package org.iesalandalus.programacion.alquilervehiculos.vista;
 
+import javax.naming.OperationNotSupportedException;
+
 public enum Opcion {
 	
 	SALIR("Salir"), 
@@ -26,13 +28,13 @@ public enum Opcion {
 		this.texto = texto;
 	}
 	
-	public boolean esOrdinalValido(int ordinal) {
-		return ordinal >= 0 && ordinal < Opcion.values().length ? true : false;
+	private static boolean esOrdinalValido(int ordinal) {
+		return (ordinal >= 0 && ordinal < Opcion.values().length);
 	}
 	
-	public Opcion get(int ordinal) {
+	public static Opcion get(int ordinal) {
 		if(!esOrdinalValido(ordinal)) {
-			throw new IllegalArgumentException("ERROR: Ordinal no valido");
+			throw new IllegalArgumentException("ERROR: Opcion no valida");
 		}
 		return Opcion.values()[ordinal];
 	}
