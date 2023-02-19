@@ -6,8 +6,8 @@ public enum Opcion {
 	
 	SALIR("Salir"), 
 	INSERTAR_CLIENTE("Insertar cliente"), 
-	INSERTAR_TURISMO("Insrtar turismo"), 
-	INSERTAR_ALQUILER("Insrtar alquiler"),
+	INSERTAR_TURISMO("Insertar turismo"), 
+	INSERTAR_ALQUILER("Insertar alquiler"),
 	BUSCAR_CLIENTE("Buscar cliente"),
 	BUSCAR_TURISMO("Buscar turismo"),
 	BUSCAR_ALQUILER("Buscar alquiler"),
@@ -34,7 +34,7 @@ public enum Opcion {
 	
 	public static Opcion get(int ordinal) {
 		if(!esOrdinalValido(ordinal)) {
-			throw new IllegalArgumentException("ERROR: Opcion no valida");
+			throw new IllegalArgumentException("ERROR: Opcion no válida.");
 		}
 		return Opcion.values()[ordinal];
 	}
