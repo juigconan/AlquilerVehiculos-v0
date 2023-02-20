@@ -147,9 +147,10 @@ public class Vista {
 
 	private void buscarCliente() {
 		Consola.mostrarCabecera("Insertar cliente");
+		Cliente clienteABuscar = Consola.leerClienteDni();
 		Cliente cliente = null;
 		try {
-			cliente = controlador.buscarCliente(Consola.leerClienteDni());
+			cliente = controlador.buscar(clienteABuscar);
 		} catch (IllegalArgumentException | NullPointerException e) {
 			System.out.println(e.getMessage());
 		}
@@ -158,9 +159,10 @@ public class Vista {
 
 	private void buscarTurismo() {
 		Consola.mostrarCabecera("Insertar turismo");
+		Turismo turismoABuscar = Consola.leerTurismoMatricula();
 		Turismo turismo = null;
 		try {
-			turismo = controlador.buscarTurismo(Consola.leerTurismoMatricula());
+			turismo = controlador.buscar(turismoABuscar);
 		} catch (IllegalArgumentException | NullPointerException e) {
 			System.out.println(e.getMessage());
 		}
@@ -169,9 +171,10 @@ public class Vista {
 
 	private void buscarAlquiler() {
 		Consola.mostrarCabecera("Insertar alquiler");
+		Alquiler alquilerABuscar = Consola.leerAlquiler();
 		Alquiler alquiler = null;
 		try {
-			alquiler = controlador.buscarAlquiler(Consola.leerAlquiler());
+			alquiler = controlador.buscar(alquilerABuscar);
 		} catch (IllegalArgumentException | NullPointerException e) {
 			System.out.println(e.getMessage());
 		}
@@ -234,36 +237,63 @@ public class Vista {
 
 	private void listarClientes() {
 		Consola.mostrarCabecera("Listado de clientes");
-		controlador.listarClientes();
+		StringBuilder listado = new StringBuilder();
+		for (Cliente cliente : controlador.getClientes()) {
+			// El system.getProperty esta mirado de Internet, pero lo que hace es coger el
+			// separador de linea del sistema.
+			listado.append(cliente).append(System.getProperty("line.separator"));
+		}
+		System.out.println(listado.isEmpty() ? "No existe ningún cliente." : listado);
 	}
 
 	private void listarTurismos() {
 		Consola.mostrarCabecera("Listado de turismos");
-		controlador.listarTurismos();
+		StringBuilder listado = new StringBuilder();
+		for (Turismo turismo : controlador.getTurismos()) {
+			listado.append(turismo).append(System.getProperty("line.separator"));
+		}
+		System.out.println(listado.isEmpty() ? "No existe ningún turismo." : listado);
 	}
 
 	private void listarAlquileres() {
 		Consola.mostrarCabecera("Listado de alquileres");
-		controlador.listarAlquileres();
+		StringBuilder listado = new StringBuilder();
+		for (Alquiler alquiler : controlador.getAlquileres()) {
+			listado.append(alquiler).append(System.getProperty("line.separator"));
+		}
+		System.out.println(listado.isEmpty() ? "No existe ningún alquiler." : listado);
 	}
 
 	private void listarAlquileresCliente() {
 		Consola.mostrarCabecera("Listado de alquileres del cliente");
+		StringBuilder listado = new StringBuilder();
+		Cliente clienteABuscar = null;
 		try {
-			controlador.listarAlquileresClientes(Consola.leerCliente());
+			clienteABuscar = Consola.leerClienteDni();
 		} catch (IllegalArgumentException | NullPointerException e) {
 			System.out.println(e.getMessage());
 		}
+		for (Alquiler alquiler : controlador.getAlquileresCliente(clienteABuscar)) {
+
+			listado.append(alquiler).append(System.getProperty("line.separator"));
+		}
+		System.out.println(listado.isEmpty() ? "Este cliente no tiene ningún alquiler." : listado);
 
 	}
 
 	private void listarAlquileresTurismo() {
 		Consola.mostrarCabecera("Listado de alquileres del turismo");
+		StringBuilder listado = new StringBuilder();
+		Turismo turismoABuscar = null;
 		try {
-			controlador.listarAlquileresTurismo(Consola.leerTurismo());
-		} catch (IllegalArgumentException | NullPointerException e) {
+			turismoABuscar = Consola.leerTurismoMatricula();
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		for (Alquiler alquiler : controlador.getAlquileresTurismo(turismoABuscar)) {
+			listado.append(alquiler).append(System.getProperty("line.separator"));
+		}
+		System.out.println(listado.isEmpty() ? "Este turismo no tiene ningún alquiler." : listado);
 	}
 
 }

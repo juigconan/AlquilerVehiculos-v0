@@ -1,6 +1,7 @@
 package org.iesalandalus.programacion.alquilervehiculos.controlador;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
@@ -8,6 +9,7 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.Modelo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.Alquileres;
 import org.iesalandalus.programacion.alquilervehiculos.vista.Vista;
 
 public class Controlador {
@@ -46,17 +48,17 @@ public class Controlador {
 		modelo.insertar(alquiler);
 	}
 
-	public Cliente buscarCliente(Cliente cliente) {
+	public Cliente buscar(Cliente cliente) {
 		return modelo.buscar(cliente);
 
 	}
 
-	public Turismo buscarTurismo(Turismo turismo) {
+	public Turismo buscar(Turismo turismo) {
 		return modelo.buscar(turismo);
 
 	}
 
-	public Alquiler buscarAlquiler(Alquiler alquiler) {
+	public Alquiler buscar(Alquiler alquiler) {
 		return modelo.buscar(alquiler);
 
 	}
@@ -85,52 +87,24 @@ public class Controlador {
 		modelo.borrar(alquiler);
 	}
 
-	public void listarClientes() {
-		StringBuilder listado = new StringBuilder();
-		for (Cliente cliente : modelo.getClientes()) {
-			listado.append(cliente).append(System.getProperty("line.separator"));
-		}
-		System.out.println(listado.isEmpty() ? "No existe ningún cliente." : listado);
+	public List<Cliente> getClientes() {
+		return modelo.getClientes();
 	}
 
-	public void listarTurismos() {
-		StringBuilder listado = new StringBuilder();
-		for (Turismo turismo : modelo.getTurismos()) {
-			listado.append(turismo).append(System.getProperty("line.separator"));
-		}
-		System.out.println(listado.isEmpty() ? "No existe ningún turismo." : listado);
+	public List<Turismo> getTurismos() {
+		return modelo.getTurismos();
 	}
 
-	public void listarAlquileres() {
-		StringBuilder listado = new StringBuilder();
-		for (Alquiler alquiler : modelo.getAlquileres()) {
-			listado.append(alquiler).append(System.getProperty("line.separator"));
-		}
-		System.out.println(listado.isEmpty() ? "No existe ningún alquiler." : listado);
-
+	public List<Alquiler> getAlquileres() {
+		return modelo.getAlquileres();
 	}
 
-	public void listarAlquileresClientes(Cliente cliente) {
-		StringBuilder listado = new StringBuilder();
-		for (Alquiler alquiler : modelo.getAlquileres(cliente)) {
-			// El system.getProperty esta mirado de Internet, pero lo que hace es coger el
-			// separador de linea del sistema.
-			listado.append(alquiler).append(System.getProperty("line.separator"));
-		}
-		System.out.println(listado.isEmpty() ? "Este cliente no tiene ningún alquiler." : listado);
-
+	public List<Alquiler> getAlquileresCliente(Cliente cliente) {
+		return modelo.getAlquileres(cliente);
 	}
 
-	public void listarAlquileresTurismo(Turismo turismo) {
-		StringBuilder listado = new StringBuilder();
-		if(modelo.buscar(turismo) == null) {
-			throw new NullPointerException("ERROR: No existe el turismo");
-		}
-		for (Alquiler alquiler : modelo.getAlquileres(turismo)) {
-			listado.append(alquiler).append(System.getProperty("line.separator"));
-		}
-		System.out.println(listado.isEmpty() ? "Este turismo no tiene ningún alquiler." : listado);
-
+	public List<Alquiler> getAlquileresTurismo(Turismo turismo) {
+		return modelo.getAlquileres(turismo);
 	}
 
 }
