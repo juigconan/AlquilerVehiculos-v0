@@ -38,7 +38,7 @@ public enum Opcion {
 		}
 		return Opcion.values()[ordinal];
 	}
-	
+	@Override
 	public String toString() {
 		return String.format("%d.- %s",ordinal(),texto);
 	}

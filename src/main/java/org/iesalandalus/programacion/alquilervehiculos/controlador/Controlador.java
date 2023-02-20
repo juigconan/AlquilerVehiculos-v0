@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.alquilervehiculos.modelo.controlador;
+package org.iesalandalus.programacion.alquilervehiculos.controlador;
 
 import java.time.LocalDate;
 
@@ -86,26 +86,36 @@ public class Controlador {
 	}
 
 	public void listarClientes() {
-		modelo.getClientes();
+		for(Cliente cliente : modelo.getClientes()) {
+			System.out.println(cliente);
+		}
 	}
 
 	public void listarTurismos() {
-		modelo.getTurismos();
+		for(Turismo turismo : modelo.getTurismos()) {
+			System.out.println(turismo);
+		}
 
 	}
 
 	public void listarAlquileres() {
-		// TODO Auto-generated method stub
+		for(Alquiler alquiler : modelo.getAlquileres()) {
+			System.out.println(alquiler);
+		}
 
 	}
 
 	public void listarAlquileresClientes(Cliente cliente) {
-		// TODO Auto-generated method stub
+		for(Alquiler alquiler :modelo.getAlquileres(cliente)) {
+			System.out.println(alquiler);
+		}
 
 	}
 
 	public void listarAlquileresTurismo(Turismo turismo) {
-		// TODO Auto-generated method stub
+		for(Alquiler alquiler : modelo.getAlquileres(turismo)) {
+			System.out.println(alquiler);
+		}
 
 	}
 

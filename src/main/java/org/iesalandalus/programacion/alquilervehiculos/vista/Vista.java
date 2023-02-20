@@ -2,7 +2,7 @@ package org.iesalandalus.programacion.alquilervehiculos.vista;
 
 import javax.naming.OperationNotSupportedException;
 
-import org.iesalandalus.programacion.alquilervehiculos.modelo.controlador.Controlador;
+import org.iesalandalus.programacion.alquilervehiculos.controlador.Controlador;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
@@ -85,6 +85,10 @@ public class Vista {
 		}
 		case LISTAR_ALQUILERES_TURISMO: {
 			listarAlquileresTurismo();
+		}
+		default:{
+			//Nunca se deberia llegar a este codigo, pero por si acaso aqui lo dejo
+			throw new IllegalArgumentException("ERROR: Opción no valida.");
 		}
 
 		}
