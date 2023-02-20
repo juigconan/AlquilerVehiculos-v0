@@ -1,6 +1,11 @@
 package org.iesalandalus.programacion.alquilervehiculos.vista;
 
+import javax.naming.OperationNotSupportedException;
+
 import org.iesalandalus.programacion.alquilervehiculos.modelo.controlador.Controlador;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
 
 public class Vista {
 
@@ -31,7 +36,7 @@ public class Vista {
 
 		switch (opcion) {
 		case SALIR: {
-
+			terminar();
 		}
 		case INSERTAR_CLIENTE: {
 			insertarCliente();
@@ -87,83 +92,102 @@ public class Vista {
 	}
 
 	private void insertarCliente() {
-		// TODO Auto-generated method stub
-		
+		Consola.mostrarCabecera("Insertar cliente");
+		try {
+			controlador.insertarCliente(Consola.leerCliente());
+			System.out.println("Cliente insertado correctamente");
+		} catch (OperationNotSupportedException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	private void insertarTurismo() {
-		// TODO Auto-generated method stub
+		Consola.mostrarCabecera("Insertar turismo");
+		try {
+			controlador.insertarTurismo(Consola.leerTurismo());
+			System.out.println("Turismo insertado correctamente.");
+		} catch (OperationNotSupportedException e) {
+			System.out.println(e.getMessage());
+		}
 		
 	}
 
 	private void insertarAlquiler() {
-		// TODO Auto-generated method stub
+		Consola.mostrarCabecera("Insertar alquiler");
+		try {
+			controlador.insertarAlquiler(Consola.leerAlquiler());
+			System.out.println("Alquiler insertado correctamente.");
+		} catch (OperationNotSupportedException e) {
+			System.out.println(e.getMessage());
+		}
 		
 	}
 
 	private void buscarCliente() {
-		// TODO Auto-generated method stub
-		
+		Consola.mostrarCabecera("Insertar cliente");
+		controlador.buscarCliente(Consola.leerCliente());
 	}
 
 	private void buscarTurismo() {
-		// TODO Auto-generated method stub
-		
+		Consola.mostrarCabecera("Insertar turismo");
+		controlador.buscarTurismo(Consola.leerTurismo());
 	}
 
 	private void buscarAlquiler() {
-		// TODO Auto-generated method stub
-		
+		Consola.mostrarCabecera("Insertar alquiler");
+		controlador.buscarAlquiler(Consola.leerAlquiler());
 	}
 
 	private void modificarCliente() {
-		// TODO Auto-generated method stub
-		
+		Consola.mostrarCabecera("Modificar cliente");
+		controlador.modificarCliente(Consola.leerCliente());
 	}
 
 	private void devolverAlquiler() {
-		// TODO Auto-generated method stub
-		
+		Consola.mostrarCabecera("Devolver alquiler");
+		controlador.devolverAlquiler(Consola.leerAlquiler());
 	}
 
 	private void borrarCliente() {
-		// TODO Auto-generated method stub
-		
+		Consola.mostrarCabecera("Borrar cliente");
+		controlador.borrarCliente(Consola.leerCliente());
 	}
+	
 
 	private void borrarTurismo() {
-		// TODO Auto-generated method stub
-		
+		Consola.mostrarCabecera("Borrar turismo");
+		controlador.borrarTurismo(Consola.leerTurismo());
 	}
 
 	private void borrarAlquiler() {
-		// TODO Auto-generated method stub
-		
+		Consola.mostrarCabecera("Borrar alquiler");
+		controlador.borrarAlquiler(Consola.leerAlquiler());
 	}
 
 	private void listarClientes() {
-		// TODO Auto-generated method stub
-		
+		Consola.mostrarCabecera("Listado de clientes");
+		controlador.listarClientes();
 	}
 
 	private void listarTurismos() {
-		// TODO Auto-generated method stub
-		
+		Consola.mostrarCabecera("Listado de turismos");
+		controlador.listarTurismos();
 	}
 
 	private void listarAlquileres() {
-		// TODO Auto-generated method stub
-		
+		Consola.mostrarCabecera("Listado de alquileres");
+		controlador.listarAlquileres();
 	}
 
 	private void listarAlquileresCliente() {
-		// TODO Auto-generated method stub
+		Consola.mostrarCabecera("Listado de alquileres del cliente");
+		controlador.listarAlquileresClientes(Consola.leerCliente());
 		
 	}
 
 	private void listarAlquileresTurismo() {
-		// TODO Auto-generated method stub
-		
+		Consola.mostrarCabecera("Listado de alquileres del turismo");
+		controlador.listarAlquileresTurismo(Consola.leerTurismo());
 	}
 
 }

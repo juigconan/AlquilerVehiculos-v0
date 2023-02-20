@@ -29,10 +29,10 @@ public class Consola {
 	public static void mostrarMenu() {
 		for (Opcion opcion : Opcion.values()) {
 			if (opcion.ordinal() != 0) {
-				System.out.println(opcion.toString());
+				System.out.println(opcion);
 			}
 		}
-		System.out.println(Opcion.SALIR.toString());
+		System.out.println(Opcion.SALIR);
 	}
 
 	private static String leerCadena(String mensaje) {
@@ -53,9 +53,8 @@ public class Consola {
 	public static Opcion elegirOpcion() {
 		Opcion opcion = null;
 		do {
-			int indice = leerEntero("la opcion deseada:");
 			try {
-				opcion = Opcion.get(indice);
+				opcion = Opcion.get(leerEntero("la opcion deseada:"));
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 			}
@@ -71,7 +70,8 @@ public class Consola {
 			try {
 				cliente = new Cliente(leerNombre(), leerCadena("el dni del cliente:"), leerTelefono());
 			} catch (Exception e) {
-				System.out.println("ERROR: algún parametro no es válido.");
+				System.out.println(e.getMessage());
+				System.out.println("Reintroduce los datos.");
 			}
 		} while (cliente == null);
 
@@ -81,12 +81,11 @@ public class Consola {
 	public static Cliente leerClienteDni() {
 		Cliente cliente = null;
 		do {
-			String dni = leerCadena("el dni del cliente:");
-
 			try {
-				cliente = Cliente.getClienteConDni(dni);
+				cliente = Cliente.getClienteConDni(leerCadena("el dni del cliente:"));
 			} catch (Exception e) {
-				System.out.println("ERROR: El DNI no es válido.");
+				System.out.println(e.getMessage());
+				System.out.println("Reintroduce los datos.");
 			}
 		} while (cliente == null);
 
@@ -109,7 +108,8 @@ public class Consola {
 				turismo = new Turismo(leerCadena("la marca del turismo:"), leerCadena("el modelo del turismo:"),
 						leerEntero("la cilindrada del turismo:"), leerCadena("la matricula del turismo:"));
 			} catch (Exception e) {
-				System.out.println("ERROR: algún parametro no es válido.");
+				System.out.println(e.getMessage());
+				System.out.println("Reintroduce los datos.");
 			}
 		} while (turismo == null);
 
@@ -122,7 +122,8 @@ public class Consola {
 			try {
 				turismo = Turismo.getTurismoConMatricula(leerCadena("la matricula del turismo:"));
 			} catch (Exception e) {
-				System.out.println("ERROR: La matricula no es válida.");
+				System.out.println(e.getMessage());
+				System.out.println("Reintroduce los datos.");
 			}
 		} while (turismo == null);
 
@@ -135,7 +136,8 @@ public class Consola {
 			try {
 				alquiler = new Alquiler(leerCliente(),leerTurismo(),leerFecha("la fecha del alquiler:"));
 			} catch (Exception e) {
-				System.out.println("ERROR: algún parametro no es válido.");
+				System.out.println(e.getMessage());
+				System.out.println("Reintroduce los datos.");
 			}
 		} while (alquiler == null);
 
@@ -145,5 +147,5 @@ public class Consola {
 	public static LocalDate leerFechaDevolucion() {
 		return leerFecha("la fecha de devolución:");
 	}
-
+	
 }
