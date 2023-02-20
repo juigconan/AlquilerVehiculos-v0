@@ -30,8 +30,8 @@ public class Controlador {
 	}
 
 	public void comenzar() {
-		vista.comenzar();
 		modelo.comenzar();
+		vista.comenzar();
 	}
 
 	public void insertarCliente(Cliente cliente) throws OperationNotSupportedException {
@@ -86,36 +86,50 @@ public class Controlador {
 	}
 
 	public void listarClientes() {
-		for(Cliente cliente : modelo.getClientes()) {
-			System.out.println(cliente);
+		StringBuilder listado = new StringBuilder();
+		for (Cliente cliente : modelo.getClientes()) {
+			listado.append(cliente).append(System.getProperty("line.separator"));
 		}
+		System.out.println(listado.isEmpty() ? "No existe ningún cliente." : listado);
 	}
 
 	public void listarTurismos() {
-		for(Turismo turismo : modelo.getTurismos()) {
-			System.out.println(turismo);
+		StringBuilder listado = new StringBuilder();
+		for (Turismo turismo : modelo.getTurismos()) {
+			listado.append(turismo).append(System.getProperty("line.separator"));
 		}
-
+		System.out.println(listado.isEmpty() ? "No existe ningún turismo." : listado);
 	}
 
 	public void listarAlquileres() {
-		for(Alquiler alquiler : modelo.getAlquileres()) {
-			System.out.println(alquiler);
+		StringBuilder listado = new StringBuilder();
+		for (Alquiler alquiler : modelo.getAlquileres()) {
+			listado.append(alquiler).append(System.getProperty("line.separator"));
 		}
+		System.out.println(listado.isEmpty() ? "No existe ningún alquiler." : listado);
 
 	}
 
 	public void listarAlquileresClientes(Cliente cliente) {
-		for(Alquiler alquiler :modelo.getAlquileres(cliente)) {
-			System.out.println(alquiler);
+		StringBuilder listado = new StringBuilder();
+		for (Alquiler alquiler : modelo.getAlquileres(cliente)) {
+			// El system.getProperty esta mirado de Internet, pero lo que hace es coger el
+			// separador de linea del sistema.
+			listado.append(alquiler).append(System.getProperty("line.separator"));
 		}
+		System.out.println(listado.isEmpty() ? "Este cliente no tiene ningún alquiler." : listado);
 
 	}
 
 	public void listarAlquileresTurismo(Turismo turismo) {
-		for(Alquiler alquiler : modelo.getAlquileres(turismo)) {
-			System.out.println(alquiler);
+		StringBuilder listado = new StringBuilder();
+		if(modelo.buscar(turismo) == null) {
+			throw new NullPointerException("ERROR: No existe el turismo");
 		}
+		for (Alquiler alquiler : modelo.getAlquileres(turismo)) {
+			listado.append(alquiler).append(System.getProperty("line.separator"));
+		}
+		System.out.println(listado.isEmpty() ? "Este turismo no tiene ningún alquiler." : listado);
 
 	}
 

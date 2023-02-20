@@ -18,18 +18,18 @@ public class Consola {
 	}
 
 	public static void mostrarCabecera(String mensaje) {
-		System.out.println(mensaje);
+		System.out.printf("%n%s%n", mensaje);
 		StringBuilder subrayado = new StringBuilder();
 		for (int i = 0; i < mensaje.length(); i++) {
 			subrayado.append("-");
 		}
-		System.out.println(subrayado);
+		System.out.printf("%s%n%n", subrayado);
 	}
 
 	public static void mostrarMenu() {
 		for (Opcion opcion : Opcion.values()) {
 			if (opcion.ordinal() != 0) {
-				System.out.println(opcion);
+				System.out.printf("%s%n", opcion);
 			}
 		}
 		System.out.println(Opcion.SALIR);
@@ -47,7 +47,14 @@ public class Consola {
 
 	private static LocalDate leerFecha(String mensaje) {
 		System.out.printf("Introduce %s (%s)", mensaje, PATRON_FECHA);
-		return LocalDate.parse(Entrada.cadena(), FORMATO_FECHA);
+		LocalDate fecha = null;
+		try {
+			fecha = LocalDate.parse(Entrada.cadena(), FORMATO_FECHA);
+		} catch (Exception e) {
+			throw new IllegalArgumentException("ERROR: La fecha introducida no es válida");
+		}
+
+		return fecha;
 	}
 
 	public static Opcion elegirOpcion() {
@@ -64,31 +71,15 @@ public class Consola {
 	}
 
 	public static Cliente leerCliente() {
-
 		Cliente cliente = null;
-		do {
-			try {
-				cliente = new Cliente(leerCadena("el nombre del cliente:"), leerCadena("el dni del cliente:"), leerCadena("el telefono del cliente:"));
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				System.out.println("Reintroduce los datos.");
-			}
-		} while (cliente == null);
-
+		cliente = new Cliente(leerCadena("el nombre del cliente:"), leerCadena("el dni del cliente:"),
+				leerCadena("el telefono del cliente:"));
 		return cliente;
 	}
 
 	public static Cliente leerClienteDni() {
 		Cliente cliente = null;
-		do {
-			try {
-				cliente = Cliente.getClienteConDni(leerCadena("el dni del cliente:"));
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				System.out.println("Reintroduce los datos.");
-			}
-		} while (cliente == null);
-
+		cliente = Cliente.getClienteConDni(leerCadena("el dni del cliente:"));
 		return cliente;
 	}
 
@@ -101,51 +92,27 @@ public class Consola {
 	}
 
 	public static Turismo leerTurismo() {
-
 		Turismo turismo = null;
-		do {
-			try {
-				turismo = new Turismo(leerCadena("la marca del turismo:"), leerCadena("el modelo del turismo:"),
-						leerEntero("la cilindrada del turismo:"), leerCadena("la matricula del turismo:"));
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				System.out.println("Reintroduce los datos.");
-			}
-		} while (turismo == null);
-
+		turismo = new Turismo(leerCadena("la marca del turismo:"), leerCadena("el modelo del turismo:"),
+				leerEntero("la cilindrada del turismo:"), leerCadena("la matricula del turismo:"));
 		return turismo;
 	}
-	
-	public static Turismo turismoMatricula() {
-		Turismo turismo = null;
-		do {
-			try {
-				turismo = Turismo.getTurismoConMatricula(leerCadena("la matricula del turismo:"));
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				System.out.println("Reintroduce los datos.");
-			}
-		} while (turismo == null);
 
+	public static Turismo leerTurismoMatricula() {
+		Turismo turismo = null;
+		turismo = Turismo.getTurismoConMatricula(leerCadena("la matricula del turismo:"));
 		return turismo;
+
 	}
-	
+
 	public static Alquiler leerAlquiler() {
 		Alquiler alquiler = null;
-		do {
-			try {
-				alquiler = new Alquiler(leerCliente(),leerTurismo(),leerFecha("la fecha del alquiler:"));
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				System.out.println("Reintroduce los datos.");
-			}
-		} while (alquiler == null);
-
+		alquiler = new Alquiler(leerCliente(), leerTurismo(), leerFecha("la fecha del alquiler:"));
 		return alquiler;
 	}
-	
+
 	public static LocalDate leerFechaDevolucion() {
 		return leerFecha("la fecha de devolución:");
 	}
-	
+
 }
