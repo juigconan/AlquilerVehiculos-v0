@@ -68,7 +68,7 @@ public class Consola {
 		Cliente cliente = null;
 		do {
 			try {
-				cliente = new Cliente(leerNombre(), leerCadena("el dni del cliente:"), leerTelefono());
+				cliente = new Cliente(leerCadena("el nombre del cliente:"), leerCadena("el dni del cliente:"), leerCadena("el telefono del cliente:"));
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				System.out.println("Reintroduce los datos.");
@@ -93,11 +93,11 @@ public class Consola {
 	}
 
 	public static String leerNombre() {
-		return leerCadena("el nombre del cliente:");
+		return leerCadena("el nuevo nombre del cliente:");
 	}
 
 	public static String leerTelefono() {
-		return leerCadena("el telefono del cliente:");
+		return leerCadena("el nuevo telefono del cliente:");
 	}
 
 	public static Turismo leerTurismo() {

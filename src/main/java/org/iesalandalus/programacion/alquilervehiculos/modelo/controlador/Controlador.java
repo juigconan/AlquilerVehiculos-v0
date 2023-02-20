@@ -1,5 +1,7 @@
 package org.iesalandalus.programacion.alquilervehiculos.modelo.controlador;
 
+import java.time.LocalDate;
+
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.Modelo;
@@ -65,33 +67,30 @@ public class Controlador {
 
 	}
 
-	public void devolverAlquiler(Alquiler alquiler) {
-		// TODO Auto-generated method stub
+	public void devolverAlquiler(Alquiler leerAlquiler, LocalDate fechaDevolucion)
+			throws OperationNotSupportedException {
+		modelo.devolver(leerAlquiler, fechaDevolucion);
 
 	}
 
-	public void borrarCliente(Cliente cliente) {
-		// TODO Auto-generated method stub
-
+	public void borrarCliente(Cliente cliente) throws OperationNotSupportedException {
+		modelo.borrar(cliente);
 	}
 
-	public void borrarTurismo(Turismo turismo) {
-		// TODO Auto-generated method stub
-
+	public void borrarTurismo(Turismo turismo) throws OperationNotSupportedException {
+		modelo.borrar(turismo);
 	}
 
-	public void borrarAlquiler(Alquiler alquiler) {
-		// TODO Auto-generated method stub
-
+	public void borrarAlquiler(Alquiler alquiler) throws OperationNotSupportedException {
+		modelo.borrar(alquiler);
 	}
 
 	public void listarClientes() {
-		// TODO Auto-generated method stub
-
+		modelo.getClientes();
 	}
 
 	public void listarTurismos() {
-		// TODO Auto-generated method stub
+		modelo.getTurismos();
 
 	}
 
