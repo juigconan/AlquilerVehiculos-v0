@@ -23,24 +23,25 @@ public enum Opcion {
 	LISTAR_ALQUILERES_TURISMO("Listar alquileres de turismo");
 	
 	private String texto;
-	
+
 	private Opcion(String texto) {
 		this.texto = texto;
 	}
-	
+
 	private static boolean esOrdinalValido(int ordinal) {
 		return (ordinal >= 0 && ordinal < Opcion.values().length);
 	}
-	
+
 	public static Opcion get(int ordinal) {
-		if(!esOrdinalValido(ordinal)) {
+		if (!esOrdinalValido(ordinal)) {
 			throw new IllegalArgumentException("ERROR: Opcion no válida.");
 		}
 		return Opcion.values()[ordinal];
 	}
+
 	@Override
 	public String toString() {
-		return String.format("%d.- %s",ordinal(),texto);
+		return String.format("%d.- %s", ordinal(), texto);
 	}
 
 }

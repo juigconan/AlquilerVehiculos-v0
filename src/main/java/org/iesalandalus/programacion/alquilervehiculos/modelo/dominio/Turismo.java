@@ -10,8 +10,6 @@ public class Turismo {
 	public String modelo;
 	public int cilindrada;
 	public String matricula;
-	
-	
 
 	public Turismo(String marca, String modelo, int cilindrada, String matricula) {
 		setMarca(marca);
@@ -19,9 +17,9 @@ public class Turismo {
 		setCilindrada(cilindrada);
 		setMatricula(matricula);
 	}
-	
+
 	public Turismo(Turismo turismo) {
-		if(turismo == null) {
+		if (turismo == null) {
 			throw new NullPointerException("ERROR: No es posible copiar un turismo nulo.");
 		}
 		setMarca(turismo.getMarca());
@@ -35,10 +33,10 @@ public class Turismo {
 	}
 
 	private void setMarca(String marca) {
-		if(marca == null) {
+		if (marca == null) {
 			throw new NullPointerException("ERROR: La marca no puede ser nula.");
 		}
-		if(!marca.matches(ER_MARCA)) {
+		if (!marca.matches(ER_MARCA)) {
 			throw new IllegalArgumentException("ERROR: La marca no tiene un formato válido.");
 		}
 		this.marca = marca;
@@ -49,10 +47,10 @@ public class Turismo {
 	}
 
 	private void setModelo(String modelo) {
-		if(modelo == null) {
+		if (modelo == null) {
 			throw new NullPointerException("ERROR: El modelo no puede ser nulo.");
 		}
-		if(modelo.isBlank()) {
+		if (modelo.isBlank()) {
 			throw new IllegalArgumentException("ERROR: El modelo no puede estar en blanco.");
 		}
 		this.modelo = modelo;
@@ -63,7 +61,7 @@ public class Turismo {
 	}
 
 	private void setCilindrada(int cilindrada) {
-		if(cilindrada < 1 || cilindrada > 5000) {
+		if (cilindrada < 1 || cilindrada > 5000) {
 			throw new IllegalArgumentException("ERROR: La cilindrada no es correcta.");
 		}
 		this.cilindrada = cilindrada;
@@ -74,17 +72,17 @@ public class Turismo {
 	}
 
 	private void setMatricula(String matricula) {
-		if(matricula == null) {
+		if (matricula == null) {
 			throw new NullPointerException("ERROR: La matrícula no puede ser nula.");
 		}
-		if(!matricula.matches(ER_MATRICULA)) {
+		if (!matricula.matches(ER_MATRICULA)) {
 			throw new IllegalArgumentException("ERROR: La matrícula no tiene un formato válido.");
 		}
 		this.matricula = matricula;
 	}
-	
+
 	public static Turismo getTurismoConMatricula(String matricula) {
-		return new Turismo("TurismoFicticio","ModeloFicticio", 100, matricula);
+		return new Turismo("TurismoFicticio", "ModeloFicticio", 100, matricula);
 	}
 
 	@Override
@@ -106,10 +104,7 @@ public class Turismo {
 
 	@Override
 	public String toString() {
-		return String.format("%s %s (%sCV) - %s", marca, modelo, cilindrada,
-				matricula);
+		return String.format("%s %s (%sCV) - %s", marca, modelo, cilindrada, matricula);
 	}
-	
-	
 
 }

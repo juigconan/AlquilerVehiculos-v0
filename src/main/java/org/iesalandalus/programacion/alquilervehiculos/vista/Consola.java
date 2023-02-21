@@ -51,7 +51,7 @@ public class Consola {
 		try {
 			fecha = LocalDate.parse(Entrada.cadena(), FORMATO_FECHA);
 		} catch (Exception e) {
-			throw new IllegalArgumentException("ERROR: La fecha introducida no es válida");
+			throw new IllegalArgumentException("ERROR: La fecha introducida no es válida.");
 		}
 
 		return fecha;
@@ -72,8 +72,7 @@ public class Consola {
 
 	public static Cliente leerCliente() {
 		Cliente cliente = null;
-		cliente = new Cliente(leerCadena("el nombre del cliente:"), leerCadena("el dni del cliente:"),
-				leerCadena("el telefono del cliente:"));
+		cliente = new Cliente(leerNombre(), leerCadena("el dni del cliente:"), leerTelefono());
 		return cliente;
 	}
 
@@ -84,11 +83,11 @@ public class Consola {
 	}
 
 	public static String leerNombre() {
-		return leerCadena("el nuevo nombre del cliente:");
+		return leerCadena("el nombre del cliente:");
 	}
 
 	public static String leerTelefono() {
-		return leerCadena("el nuevo telefono del cliente:");
+		return leerCadena("el teléfono del cliente:");
 	}
 
 	public static Turismo leerTurismo() {
@@ -107,7 +106,7 @@ public class Consola {
 
 	public static Alquiler leerAlquiler() {
 		Alquiler alquiler = null;
-		alquiler = new Alquiler(leerCliente(), leerTurismo(), leerFecha("la fecha del alquiler:"));
+		alquiler = new Alquiler(leerClienteDni(), leerTurismoMatricula(), leerFecha("la fecha del alquiler:"));
 		return alquiler;
 	}
 

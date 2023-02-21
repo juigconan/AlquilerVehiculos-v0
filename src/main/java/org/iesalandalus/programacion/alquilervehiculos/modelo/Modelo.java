@@ -39,17 +39,19 @@ public class Modelo {
 	}
 
 	public void insertar(Alquiler alquiler) throws OperationNotSupportedException {
-		if(alquiler == null) {
+		if (alquiler == null) {
 			throw new NullPointerException("ERROR: No se puede realizar un alquiler nulo.");
 		}
-		if(clientes.buscar(alquiler.getCliente()) == null) {
+		Cliente cliente = clientes.buscar(alquiler.getCliente());
+		Turismo turismo = turismos.buscar(alquiler.getTurismo());
+		if (cliente == null) {
 			throw new OperationNotSupportedException("ERROR: No existe el cliente del alquiler.");
 		}
-		if(turismos.buscar(alquiler.getTurismo()) == null) {
+		if (turismo == null) {
 			throw new OperationNotSupportedException("ERROR: No existe el turismo del alquiler.");
 		}
-		//El constructor copia de Alquiler ya se ocupa de crear un nuevo cliente y un nuevo turismo
-		alquileres.insertar(new Alquiler(alquiler));
+
+		alquileres.insertar(new Alquiler(cliente, turismo, alquiler.getFechaAlquiler()));
 	}
 
 	public Cliente buscar(Cliente cliente) {
@@ -69,14 +71,15 @@ public class Modelo {
 	}
 
 	public void devolver(Alquiler alquiler, LocalDate fechaDevolucion) throws OperationNotSupportedException {
-		if(alquiler == null) {
+		if (alquiler == null) {
 			throw new NullPointerException("ERROR: No se puede devolver un alquiler nulo.");
 		}
-		if(alquileres.buscar(alquiler) == null) {
+		Alquiler alquilerADevolver = alquileres.buscar(alquiler);
+		if (alquilerADevolver == null) {
 			throw new OperationNotSupportedException("ERROR: No existe el alquiler a devolver.");
 		}
-		alquiler.devolver(fechaDevolucion);
-		
+		alquilerADevolver.devolver(fechaDevolucion);
+
 	}
 
 	public void borrar(Cliente cliente) throws OperationNotSupportedException {
@@ -124,15 +127,15 @@ public class Modelo {
 	public List<Alquiler> getAlquileres(Cliente cliente) {
 		List<Alquiler> listaADevolver = new ArrayList<>();
 		for (Alquiler alquiler : alquileres.get(cliente)) {
-				listaADevolver.add(new Alquiler(alquiler));	
+			listaADevolver.add(new Alquiler(alquiler));
 		}
 		return listaADevolver;
 	}
-	
+
 	public List<Alquiler> getAlquileres(Turismo turismo) {
 		List<Alquiler> listaADevolver = new ArrayList<>();
 		for (Alquiler alquiler : alquileres.get(turismo)) {
-				listaADevolver.add(new Alquiler(alquiler));
+			listaADevolver.add(new Alquiler(alquiler));
 		}
 		return listaADevolver;
 	}

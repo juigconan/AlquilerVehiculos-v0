@@ -20,7 +20,6 @@ public class Vista {
 
 	public void comenzar() {
 		Opcion opcion;
-		// controlador.comenzar();
 		do {
 			Consola.mostrarCabecera("Menu principal");
 			Consola.mostrarMenu();
@@ -105,7 +104,7 @@ public class Vista {
 			break;
 		}
 		default: {
-			// Nunca se deberia llegar a este codigo, pero por si acaso aqui lo dejo
+			// Nunca deberiamos llegar a esta excepción
 			throw new IllegalArgumentException("ERROR: Opción no valida.");
 		}
 
