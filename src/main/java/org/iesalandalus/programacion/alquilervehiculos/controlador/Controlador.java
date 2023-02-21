@@ -35,6 +35,11 @@ public class Controlador {
 		modelo.comenzar();
 		vista.comenzar();
 	}
+	
+	public void terminar() {
+		modelo.terminar();
+		vista.terminar();
+	}
 
 	public void insertarCliente(Cliente cliente) throws OperationNotSupportedException {
 		modelo.insertar(cliente);

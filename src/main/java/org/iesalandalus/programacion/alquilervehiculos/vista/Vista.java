@@ -36,7 +36,7 @@ public class Vista {
 
 		switch (opcion) {
 		case SALIR: {
-			terminar();
+			controlador.terminar();
 			break;
 		}
 		case INSERTAR_CLIENTE: {
